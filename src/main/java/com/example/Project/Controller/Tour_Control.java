@@ -27,15 +27,9 @@ public class Tour_Control {
         return ResponseEntity.noContent().build();
     }
 
-//    @GetMapping("/tournament/{tour_year}")
-//    public ResponseEntity<Void> findTournament_ByYear(@PathVariable Long tour_year) {
-//        tourServImp.findByYear(tour_year);
-//        return ResponseEntity.noContent().build();
-//    }
 
     @PostMapping("/tournament")
     public ResponseEntity<Tour_Dto> addTournament(@RequestBody Tour_Dto tourDto) {
-
         tourServImp.addTour(tourDto);
         return new ResponseEntity<Tour_Dto>(HttpStatus.OK);
     }

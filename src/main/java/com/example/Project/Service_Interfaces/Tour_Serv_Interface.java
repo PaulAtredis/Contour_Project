@@ -9,8 +9,6 @@ public interface Tour_Serv_Interface {
 
     public List<Tour_Dto> findById(Long tour_id);
 
-//    public List<Tour_Dto> findByYear(Long tour_year);
-
     public Tour_Dto addTour(Tour_Dto tourDto);
 
     public void deleteTour(Long tour_id);

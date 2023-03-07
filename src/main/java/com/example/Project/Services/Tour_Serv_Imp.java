@@ -42,19 +42,12 @@ public class Tour_Serv_Imp implements Tour_Serv_Interface {
 
     @Override
     public List<Tour_Dto> findById(Long tour_id) {
-        Optional<Tour_Entity> tour_entityList = tourRepo.findById(tour_id);
+        Optional<Tour_Entity> tour_entityList = Optional.of(tourRepo.findById(tour_id).orElseThrow(()->new RuntimeException("No such ID exists")));
         List<Tour_Dto> tour_dtoList=new ArrayList<>();
         tour_dtoList.add(modelMapper.map(tour_entityList, Tour_Dto.class));
         return tour_dtoList;
     }
 
-//    @Override
-//    public List<Tour_Dto> findByYear(Long tour_year) {
-//        List<Tour_Entity> tourEntityList=tourRepo.findById();
-//        List<Tour_Dto> tour_dtoList=new ArrayList<>();
-//        tour_dtoList.add(modelMapper.map(tourEntityList,Tour_Dto.class));
-//        return tour_dtoList;
-//    }
 
     @Override
     public Tour_Dto addTour(Tour_Dto tourDto) {
@@ -71,10 +64,12 @@ public class Tour_Serv_Imp implements Tour_Serv_Interface {
 
     @Override
     public Tour_Dto updateTour(long tour_id, Tour_Dto tourDto) {
-       // Optional<Tour_Entity> tour_entity = tourRepo.findById(tourDto.getTour_id());
-       // tour
-
-
-        return null;
+       Tour_Entity tourEntity= tourRepo.findById(tour_id).orElseThrow();
+        Tour_Dto tour_dto=modelMapper.map(tourEntity,Tour_Dto.class);
+        tourEntity.setTour_year(tourDto.getTour_year());
+        tourEntity.setTour_st_date(tourDto.getTour_st_date());
+        tourEntity.setTour_end_date(tourDto.getTour_end_date());
+        tourRepo.save(tourEntity);
+       return tour_dto;
     }
 }

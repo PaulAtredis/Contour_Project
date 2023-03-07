@@ -66,10 +66,11 @@ public class Matches_Serv_Imp implements Matches_Serv_Interface {
 
     @Override
     public Matches_Dto updateMatch(long match_id, Matches_Dto matchesDto) {
-
-
-
-
-        return null;
+        Matches_Entity matchesEntity= matchesRepo.findById(match_id).orElseThrow();
+        Matches_Dto matches_dto=modelMapper.map(matchesEntity,Matches_Dto.class);
+        matchesEntity.setEnd_time(matchesDto.getEnd_time());
+        matchesEntity.setStart_time(matchesDto.getStart_time());
+        matchesRepo.save(matchesEntity);
+        return matches_dto;
     }
 }

@@ -5,16 +5,16 @@ public class Tour_Dto {
     private long tour_id;
     private long tour_st_date;
     private long tour_end_date;
+    private long tour_year;
 
-//    private long tour_year;
-//
-//    public long getTour_year() {
-//        return tour_year;
-//    }
-//
-//    public void setTour_year(long tour_year) {
-//        this.tour_year = tour_year;
-//    }
+
+    public long getTour_year() {
+        return tour_year;
+    }
+
+    public void setTour_year(long tour_year) {
+        this.tour_year = tour_year;
+    }
 
     public long getTour_id() {
         return tour_id;
