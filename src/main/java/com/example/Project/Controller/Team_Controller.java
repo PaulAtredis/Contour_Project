@@ -10,34 +10,33 @@ import java.util.List;
 
 
     @RestController
-    @RequestMapping("/team")
     public class Team_Controller {
         @Autowired
         private Team_Service teamService;
 
-        @GetMapping
+        @GetMapping("/team")
         private List<Team_Entity> getAll() {
             return teamService.getAll();
         }
 
-        @GetMapping("/{id}")
+        @GetMapping("/team/{id}")
         private Team_Entity getByID(@PathVariable int id) {
 
             return teamService.getByID(id);
         }
 
-        @PostMapping
+        @PostMapping("/team")
         private Team_Entity add(@RequestBody Team_Entity teamEntity) {
             return teamService.addOrUpdate(teamEntity);
         }
 
-        @PutMapping("/{id}")
+        @PutMapping("/team/{id}")
         private Team_Entity update(@PathVariable int id, @RequestBody Team_Entity teamEntity) {
             teamEntity.setTeamId(id);
             return teamService.addOrUpdate(teamEntity);
         }
 
-        @DeleteMapping("/{id}")
+        @DeleteMapping("/team/{id}")
         private void delete(@PathVariable int id) {
             teamService.deleteByID(id);
         }

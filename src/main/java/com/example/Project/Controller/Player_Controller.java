@@ -9,31 +9,30 @@ import java.util.List;
 
 
     @RestController
-    @RequestMapping("/player")
     public class Player_Controller {
         @Autowired
         private Player_Service playerService;
 
-        @GetMapping
+        @GetMapping("/player")
         private List<Player_Entity> getAll() {
             return playerService.getAll();
         }
 
-        @GetMapping("/{id}")
+        @GetMapping("/player/{id}")
         private Player_Entity getByID(@PathVariable int id) {
 
             return playerService.getByID(id);
         }
-        @PostMapping
+        @PostMapping("/player")
         private Player_Entity add(@RequestBody Player_Entity playerEntity) {
             return playerService.addOrUpdate(playerEntity);
         }
-        @PutMapping("/{id}")
+        @PutMapping("/player/{id}")
         private Player_Entity update(@PathVariable int id, @RequestBody Player_Entity playerEntity) {
             playerEntity.setPid(id);
             return playerService.addOrUpdate(playerEntity);
         }
-        @DeleteMapping("/{id}")
+        @DeleteMapping("/player/{id}")
         private void delete(@PathVariable int id) {
             playerService.deleteByID(id);
         }
