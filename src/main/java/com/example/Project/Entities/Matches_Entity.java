@@ -1,6 +1,7 @@
 package com.example.Project.Entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "matches")
@@ -14,16 +15,20 @@ public class Matches_Entity {
     @Column(name = "end_time")
     private long end_time;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tour_id")
-    private Tour_Entity tourEntity;
 
-    public Tour_Entity getTourEntity() {
-        return tourEntity;
+
+    @ManyToMany
+    @JoinTable(name = "match_by_team",
+            joinColumns = @JoinColumn(name = "match_id"),
+            inverseJoinColumns = @JoinColumn(name = "teamId"))
+    private Set<Team_Entity> teamEntity;
+
+    public Set<Team_Entity> getTeamEntity() {
+        return teamEntity;
     }
 
-    public void setTourEntity(Tour_Entity tourEntity) {
-        this.tourEntity = tourEntity;
+    public void setTeamEntity(Set<Team_Entity> teamEntity) {
+        this.teamEntity = teamEntity;
     }
 
     public long getMatch_id() {

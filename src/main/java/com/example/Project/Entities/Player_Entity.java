@@ -20,9 +20,7 @@ import javax.persistence.*;
         private String pname;
         private String prating;
         private int page;
-        // @ManyToOne
-// @JoinColumn(name = "team_id", insertable = false, updatable = false)
-// private Team team;
+
         public int getPid() {
             return pid;
         }

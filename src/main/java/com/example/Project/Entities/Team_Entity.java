@@ -6,21 +6,36 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
-    @AllArgsConstructor
+@AllArgsConstructor
     @NoArgsConstructor
     @ToString
     @Entity
     public class Team_Entity {
-        @Id
+    @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "teamId", nullable = false)
         private int teamId;
         private String teamName;
+
         @OneToMany(targetEntity = Player_Entity.class,cascade = CascadeType.ALL)
         @JoinColumn(name="p_fk", referencedColumnName = "teamId")
         private List<Player_Entity> playerEntity;
-        public int getTeamId() {
+
+
+        @ManyToMany(mappedBy = "teamEntity",fetch = FetchType.LAZY)
+        private Set<Matches_Entity> matches;
+
+    public Set<Matches_Entity> getMatches() {
+        return matches;
+    }
+
+    public void setMatches(Set<Matches_Entity> matches) {
+        this.matches = matches;
+    }
+
+    public int getTeamId() {
             return teamId;
         }
         public void setTeamId(int teamId) {

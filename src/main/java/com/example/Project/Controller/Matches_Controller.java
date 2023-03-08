@@ -14,29 +14,29 @@ public class Matches_Controller {
     @Autowired
     Matches_Serv_Imp matchesServImp;
 
-    @GetMapping("/tournament/matches")
+    @GetMapping("/matches")
     public ResponseEntity<List<Matches_Dto>> getMatches() {
         return new ResponseEntity<>(matchesServImp.findAll(), HttpStatus.OK);
     }
 
-    @GetMapping("/tournament/matches/{match_id}")
+    @GetMapping("/matches/{match_id}")
     public ResponseEntity<Matches_Dto> findMatch_ByID(@PathVariable Long match_id) {
         return new ResponseEntity<>(matchesServImp.findById(match_id),HttpStatus.OK);
     }
-    @PostMapping("/tournament/matches")
+    @PostMapping("/matches")
     public ResponseEntity<Matches_Dto> addMatch(@RequestBody Matches_Dto tourDto) {
 
         matchesServImp.addMatch(tourDto);
         return new ResponseEntity<Matches_Dto>(HttpStatus.OK);
     }
 
-    @DeleteMapping("/tournament/matches/{match_id}")
+    @DeleteMapping("/matches/{match_id}")
     public ResponseEntity<Void> deleteMatch(@PathVariable Long match_id) {
         matchesServImp.deleteMatch(match_id);
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/tournament/matches/{match_id}")
+    @PutMapping("/matches/{match_id}")
     public ResponseEntity<Matches_Dto> updateMatch(@PathVariable Long match_id, @RequestBody Matches_Dto matchesDto) {
         matchesServImp.updateMatch(match_id, matchesDto);
         return ResponseEntity.ok(matchesDto);

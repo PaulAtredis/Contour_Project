@@ -1,6 +1,7 @@
 package com.example.Project.Entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tournament")
@@ -19,6 +20,18 @@ public class Tour_Entity {
 
     @Column(name = "year")
     private long tour_year;
+
+    @OneToMany(targetEntity = Matches_Entity.class, cascade = CascadeType.ALL)
+    @JoinColumn(name="tour_id",referencedColumnName ="tournament_id" )
+    private List<Matches_Entity> matches;
+
+    public List<Matches_Entity> getMatches_entity() {
+        return matches;
+    }
+
+    public void setMatches_entity(List<Matches_Entity> matches_entity) {
+        this.matches = matches_entity;
+    }
 
     public long getTour_year() {
         return tour_year;
