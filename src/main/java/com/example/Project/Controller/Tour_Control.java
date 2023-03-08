@@ -22,9 +22,8 @@ public class Tour_Control {
     }
 
     @GetMapping("/tournament/{tour_id}")
-    public ResponseEntity<List<Tour_Dto>> findTournament_ByID(@PathVariable Long tour_id) {
-        tourServImp.findById(tour_id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Tour_Dto> findTournament_ByID(@PathVariable Long tour_id) {
+    return new ResponseEntity<>(tourServImp.findById(tour_id),HttpStatus.OK);
     }
 
 

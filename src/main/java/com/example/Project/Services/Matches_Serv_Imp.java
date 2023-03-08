@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class Matches_Serv_Imp implements Matches_Serv_Interface {
@@ -42,15 +41,13 @@ public class Matches_Serv_Imp implements Matches_Serv_Interface {
     }
 
     @Override
-    public List<Matches_Dto> findById(Long match_id) {
+    public Matches_Dto findById(Long match_id) {
 
+            Matches_Entity matchesEntity =matchesRepo.findById(match_id).orElseThrow(()->new RuntimeException("No such ID exists"));
+            Matches_Dto matches_dto=modelMapper.map(matchesEntity, Matches_Dto.class);
+            return matches_dto;
+        }
 
-        Optional<Matches_Entity> matchesEntity = matchesRepo.findById(match_id);
-        List<Matches_Dto> matchesDtoList=new ArrayList<>();
-        matchesDtoList.add(modelMapper.map(matchesEntity, Matches_Dto.class));
-        return matchesDtoList;
-
-    }
 
     @Override
     public Matches_Dto addMatch(Matches_Dto matchesDto) {

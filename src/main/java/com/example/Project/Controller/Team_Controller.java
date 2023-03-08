@@ -14,29 +14,34 @@ import java.util.List;
         @Autowired
         private Team_Service teamService;
 
-        @GetMapping("/team")
+        //@GetMapping("/team")
+        @GetMapping(value = "/team",consumes = {"application/xml","application/json"})
         private List<Team_Entity> getAll() {
             return teamService.getAll();
         }
 
-        @GetMapping("/team/{id}")
+        //@GetMapping("/team/{id}")
+        @GetMapping(value = "/team/{id}",consumes = {"application/xml","application/json"})
         private Team_Entity getByID(@PathVariable int id) {
 
             return teamService.getByID(id);
         }
 
-        @PostMapping("/team")
+        //@PostMapping("/team")
+        @PostMapping(value = "/team",consumes = {"application/xml","application/json"})
         private Team_Entity add(@RequestBody Team_Entity teamEntity) {
             return teamService.addOrUpdate(teamEntity);
         }
 
-        @PutMapping("/team/{id}")
+        //@PutMapping("/team/{id}")
+        @PutMapping(value = "/team/{id}",consumes = {"application/xml","application/json"})
         private Team_Entity update(@PathVariable int id, @RequestBody Team_Entity teamEntity) {
             teamEntity.setTeamId(id);
             return teamService.addOrUpdate(teamEntity);
         }
 
-        @DeleteMapping("/team/{id}")
+        //@DeleteMapping("/team/{id}")
+        @DeleteMapping(value = "/team/{id}",consumes = {"application/xml","application/json"})
         private void delete(@PathVariable int id) {
             teamService.deleteByID(id);
         }

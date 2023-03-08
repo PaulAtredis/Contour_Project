@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class Tour_Serv_Imp implements Tour_Serv_Interface {
@@ -41,11 +40,10 @@ public class Tour_Serv_Imp implements Tour_Serv_Interface {
     }
 
     @Override
-    public List<Tour_Dto> findById(Long tour_id) {
-        Optional<Tour_Entity> tour_entityList = Optional.of(tourRepo.findById(tour_id).orElseThrow(()->new RuntimeException("No such ID exists")));
-        List<Tour_Dto> tour_dtoList=new ArrayList<>();
-        tour_dtoList.add(modelMapper.map(tour_entityList, Tour_Dto.class));
-        return tour_dtoList;
+    public Tour_Dto findById(Long tour_id) {
+        Tour_Entity tour_entity =tourRepo.findById(tour_id).orElseThrow(()->new RuntimeException("No such ID exists"));
+        Tour_Dto tour_dto=modelMapper.map(tour_entity, Tour_Dto.class);
+        return tour_dto;
     }
 
 

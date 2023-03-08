@@ -20,9 +20,8 @@ public class Matches_Controller {
     }
 
     @GetMapping("/tournament/matches/{match_id}")
-    public ResponseEntity<Void> findMatch_ByID(@PathVariable Long match_id) {
-        matchesServImp.findById(match_id);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<Matches_Dto> findMatch_ByID(@PathVariable Long match_id) {
+        return new ResponseEntity<>(matchesServImp.findById(match_id),HttpStatus.OK);
     }
     @PostMapping("/tournament/matches")
     public ResponseEntity<Matches_Dto> addMatch(@RequestBody Matches_Dto tourDto) {
