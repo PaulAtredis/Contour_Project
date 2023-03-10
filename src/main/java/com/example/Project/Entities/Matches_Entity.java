@@ -15,6 +15,8 @@ public class Matches_Entity {
     @Column(name = "end_time")
     private long end_time;
 
+    @Column(name = "match_name")
+    private String matchName;
 
 
     @ManyToMany
@@ -22,6 +24,18 @@ public class Matches_Entity {
             joinColumns = @JoinColumn(name = "match_id"),
             inverseJoinColumns = @JoinColumn(name = "teamId"))
     private Set<Team_Entity> teamEntity;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="tour_id")
+    private Tour_Entity tourEntity;
+
+    public Tour_Entity getTourEntity() {
+        return tourEntity;
+    }
+    public void setTourEntity(Tour_Entity tour_entity) {
+        this.tourEntity = tourEntity;
+    }
 
     public Set<Team_Entity> getTeamEntity() {
         return teamEntity;
@@ -54,4 +68,17 @@ public class Matches_Entity {
     public void setEnd_time(long end_time) {
         this.end_time = end_time;
     }
+
+    public String getMatchName() {
+        return matchName;
+    }
+
+    public void setMatchName(String matchName) {
+        this.matchName = matchName;
+    }
+
+
+
+
+
 }

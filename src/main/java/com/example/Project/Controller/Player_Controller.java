@@ -20,7 +20,7 @@ import java.util.List;
         }
 
         //@GetMapping("/player/{id}")
-        @GetMapping(value = "/player/{id}",consumes = {"application/xml","application/json"})
+        @GetMapping(value = "/player/{id}")
         private Player_Entity getByID(@PathVariable int id) {
 
             return playerService.getByID(id);

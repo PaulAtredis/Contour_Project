@@ -1,6 +1,7 @@
 package com.example.Project.Entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,21 +18,29 @@ public class Tour_Entity {
     @Column(name = "end_date")
     private long tour_end_date;
 
-
     @Column(name = "year")
     private long tour_year;
 
-    @OneToMany(targetEntity = Matches_Entity.class, cascade = CascadeType.ALL)
-    @JoinColumn(name="tour_id",referencedColumnName ="tournament_id" )
+    @Column(name = "tourName")
+    private String tourName;
+
+
+
+    @OneToMany(mappedBy = "tourEntity")
     private List<Matches_Entity> matches;
 
-    public List<Matches_Entity> getMatches_entity() {
+    public List<Matches_Entity> getMatches() {
         return matches;
     }
 
-    public void setMatches_entity(List<Matches_Entity> matches_entity) {
-        this.matches = matches_entity;
+    public void setMatches(List<Matches_Entity> matches) {
+        this.matches = matches;
     }
+
+    public void addMatches(Matches_Entity matchesEntity){
+     if(matches==null){ matches = new ArrayList<>();}
+     matches.add(matchesEntity);
+     }
 
     public long getTour_year() {
         return tour_year;
@@ -63,5 +72,13 @@ public class Tour_Entity {
 
     public void setTour_end_date(long tour_end_date) {
         this.tour_end_date = tour_end_date;
+    }
+
+    public String getTourName() {
+        return tourName;
+    }
+
+    public void setTourName(String tourName) {
+        this.tourName = tourName;
     }
 }

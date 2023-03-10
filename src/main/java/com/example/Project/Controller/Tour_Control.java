@@ -27,9 +27,20 @@ public class Tour_Control {
     }
 
 
+
     @PostMapping("/tournament")
     public ResponseEntity<Tour_Dto> addTournament(@RequestBody Tour_Dto tourDto) {
         tourServImp.addTour(tourDto);
+        return new ResponseEntity<Tour_Dto>(HttpStatus.OK);
+    }
+    @GetMapping("/tournament/name/{tourName}")
+    public ResponseEntity<Tour_Dto> findBy_MatchName(@PathVariable String tourName) {
+        return new ResponseEntity<>(tourServImp.findBy_TourName(tourName),HttpStatus.OK);
+    }
+
+    @PutMapping("/tournament/matches")
+    public ResponseEntity<Tour_Dto> upMatchesWithTour(@RequestBody Tour_Dto tourDto){
+        tourServImp.updateMatchesWithTour(tourDto);
         return new ResponseEntity<Tour_Dto>(HttpStatus.OK);
     }
 

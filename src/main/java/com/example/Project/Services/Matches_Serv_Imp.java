@@ -48,12 +48,17 @@ public class Matches_Serv_Imp implements Matches_Serv_Interface {
             return matches_dto;
         }
 
+    @Override
+    public Matches_Dto findBy_MatchName(String matchName) {
+        Matches_Entity matches_entity = matchesRepo.findByMatchName(matchName);
+        Matches_Dto matchesDto=modelMapper.map(matches_entity,Matches_Dto.class);
+        return matchesDto;
+    }
 
     @Override
     public Matches_Dto addMatch(Matches_Dto matchesDto) {
         Matches_Entity s= matchesRepo.save(modelMapper.map(matchesDto,Matches_Entity.class));
         return matchesDto;
-
     }
 
     @Override
@@ -70,4 +75,8 @@ public class Matches_Serv_Imp implements Matches_Serv_Interface {
         matchesRepo.save(matchesEntity);
         return matches_dto;
     }
+
 }
+
+
+

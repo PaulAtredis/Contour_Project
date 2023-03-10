@@ -1,9 +1,22 @@
 package com.example.Project.Dto;
 
+import java.util.List;
+
 public class Matches_Dto {
     private long match_id;
     private long start_time;
     private long end_time;
+    private String matchName;
+    private List<Tour_Dto> tourDtoList;
+
+
+    public List<Tour_Dto> getTourDtoList() {
+        return tourDtoList;
+    }
+
+    public void setTourDtoList(List<Tour_Dto> tourDtoList) {
+        this.tourDtoList = tourDtoList;
+    }
 
     public long getMatch_id() {
         return match_id;
@@ -28,4 +41,13 @@ public class Matches_Dto {
     public void setEnd_time(long end_time) {
         this.end_time = end_time;
     }
+    public String getMatchName() {
+        return matchName;
+    }
+
+    public void setMatchName(String matchName) {
+        this.matchName = matchName;
+    }
+
+
 }
