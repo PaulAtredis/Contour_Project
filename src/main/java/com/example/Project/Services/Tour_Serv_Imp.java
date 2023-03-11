@@ -1,5 +1,7 @@
 package com.example.Project.Services;
 
+import com.example.Project.Adapter.MatchesAdapter;
+import com.example.Project.Adapter.TourAdapter;
 import com.example.Project.Dto.Tour_Dto;
 import com.example.Project.Entities.Matches_Entity;
 import com.example.Project.Entities.Tour_Entity;
@@ -23,6 +25,8 @@ Matches_Repo matchesRepo;
     ModelMapper modelMapper;
 
     private List<Tour_Dto> tourDtoList = new ArrayList<>();
+
+
 
     public List<Tour_Dto> getTourDtoList() {
         return tourDtoList;
@@ -81,23 +85,24 @@ Matches_Repo matchesRepo;
         tourRepo.save(tourEntity);
        return tour_dto;
     }
-    @Override
-    public Tour_Dto updateMatchesWithTour(Tour_Dto tourDto){
 
+    public Tour_Dto updateMatchesWithTour(Tour_Dto tourDto){
+        TourAdapter tourAdapter=new TourAdapter();
+        MatchesAdapter matchesAdapter=new MatchesAdapter();
 
         List<Matches_Entity> matches_entityList = new ArrayList<>();
         tourDto.getMatchesDtoList().forEach(matchesDto -> {
          matches_entityList.add(matchesRepo.findByMatchName(matchesDto.getMatchName()));
         });
-      Tour_Entity tour_entity=tourRepo.findByTourName(tourDto.getTourName());
-      matches_entityList.forEach(matchesEntity -> {matchesEntity.setTourEntity(tour_entity);
-      tour_entity.addMatches(matchesEntity);
+      Tour_Entity tour_entity=tourRepo.findByTourName(tourAdapter.convDtoToDao(tourDto).getTourName());
+      matches_entityList.forEach(matchesEntity -> {
+          matchesEntity.setTourEntity(tour_entity);
+          tour_entity.addMatches(matchesEntity);
 
       });
 
-
       tourRepo.save(tour_entity);
-      Tour_Dto tour_dto=modelMapper.map(tour_entity,Tour_Dto.class);
-      return tour_dto;
+
+      return tourAdapter.convDaoToDto(tour_entity);
   }
 }

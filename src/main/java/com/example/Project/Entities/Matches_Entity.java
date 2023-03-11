@@ -34,7 +34,7 @@ public class Matches_Entity {
         return tourEntity;
     }
     public void setTourEntity(Tour_Entity tour_entity) {
-        this.tourEntity = tourEntity;
+        this.tourEntity = tour_entity;
     }
 
     public Set<Team_Entity> getTeamEntity() {
