@@ -2,6 +2,7 @@ package com.example.Project.Services;
 
 import com.example.Project.Adapter.MatchesAdapter;
 import com.example.Project.Adapter.TourAdapter;
+import com.example.Project.Dto.Matches_Dto;
 import com.example.Project.Dto.Tour_Dto;
 import com.example.Project.Entities.Matches_Entity;
 import com.example.Project.Entities.Tour_Entity;
@@ -38,12 +39,27 @@ Matches_Repo matchesRepo;
 
     @Override
     public List<Tour_Dto> findAll() {
-        List<Tour_Entity> tourEntityList = tourRepo.findAll();
-        List<Tour_Dto> tour_dtoList = new ArrayList<>();
-        for ( Tour_Entity e: tourEntityList) {
-            tour_dtoList.add(modelMapper.map(e, Tour_Dto.class));
-        }
+//        List<Tour_Entity> tourEntityList = tourRepo.findAll();
+//        List<Tour_Dto> tour_dtoList = new ArrayList<>();
+//        for ( Tour_Entity e: tourEntityList) {
+//            tour_dtoList.add(modelMapper.map(e, Tour_Dto.class));
+//        }
+//
+//        return tour_dtoList;
 
+        List<Tour_Entity> tour_entityList=tourRepo.findAll();
+        List<Tour_Dto> tour_dtoList=new ArrayList<>();
+        for (Tour_Entity e: tour_entityList){
+            List<Matches_Dto> matchesDtoList=new ArrayList<>();
+            List<Matches_Entity> matchesEntityList= e.getMatches();
+            for(Matches_Entity s: matchesEntityList){
+                Matches_Dto matches_dto=modelMapper.map(s, Matches_Dto.class);
+                matchesDtoList.add(matches_dto);
+            }
+            Tour_Dto tour_dto=modelMapper.map(e,Tour_Dto.class);
+            tour_dto.setMatchesDtoList(matchesDtoList);
+            tour_dtoList.add(tour_dto);
+        }
         return tour_dtoList;
     }
 
