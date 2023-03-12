@@ -1,12 +1,12 @@
 package com.example.Project.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @AllArgsConstructor
     @NoArgsConstructor
@@ -24,14 +24,15 @@ import java.util.Set;
         private List<Player_Entity> playerEntity;
 
 
-        @ManyToMany(mappedBy = "teamEntity",fetch = FetchType.LAZY)
-        private Set<Matches_Entity> matches;
+        @ManyToMany(mappedBy = "teamEntity",cascade = {CascadeType.ALL})
+        @JsonIgnore
+        private List<Matches_Entity> matches;
 
-    public Set<Matches_Entity> getMatches() {
+    public List<Matches_Entity> getMatches() {
         return matches;
     }
 
-    public void setMatches(Set<Matches_Entity> matches) {
+    public void setMatches(List<Matches_Entity> matches) {
         this.matches = matches;
     }
 

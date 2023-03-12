@@ -1,13 +1,16 @@
 package com.example.Project.Dto;
 
 
+import com.example.Project.Entities.Matches_Entity;
 import com.example.Project.Entities.Team_Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-    @Data
+import java.util.List;
+
+@Data
     @AllArgsConstructor
     @NoArgsConstructor
     @ToString
@@ -21,6 +24,7 @@ import lombok.ToString;
         public void setTeamEntity(Team_Entity teamEntity) {
             this.teamEntity = teamEntity;
         }
+        private List<Matches_Entity> matches;
 
     }
 

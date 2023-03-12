@@ -3,6 +3,7 @@ package com.example.Project.Services;
 import com.example.Project.Dto.Matches_Dto;
 import com.example.Project.Entities.Matches_Entity;
 import com.example.Project.Repositries.Matches_Repo;
+import com.example.Project.Repositries.Team_Repo;
 import com.example.Project.Service_Interfaces.Matches_Serv_Interface;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class Matches_Serv_Imp implements Matches_Serv_Interface {
     ModelMapper modelMapper;
     @Autowired
     Matches_Repo matchesRepo;
+    @Autowired
+    Team_Repo teamRepo;
 
     private List<Matches_Dto> matchesDtoList = new ArrayList<>();
 
@@ -60,6 +63,17 @@ public class Matches_Serv_Imp implements Matches_Serv_Interface {
         Matches_Entity s= matchesRepo.save(modelMapper.map(matchesDto,Matches_Entity.class));
         return matchesDto;
     }
+
+//    public Matches_Entity addMatchesWithTeams(Matches_Dto matchesDto) {
+//        Matches_Entity matches_entity =modelMapper.map(matchesDto, Matches_Entity.class);
+//        List<Team_Entity> lst= matchesDto.getTeamEntity();
+//
+//            teamRepo.saveAll(matchesDto.getTeamEntity());
+//            return matchesRepo.save(matches_entity);
+//        }
+
+
+
 
     @Override
     public void deleteMatch(Long match_id) {

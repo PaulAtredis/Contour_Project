@@ -1,7 +1,9 @@
 package com.example.Project.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "matches")
@@ -20,15 +22,16 @@ public class Matches_Entity {
 
 
     @ManyToMany
-    @JoinTable(name = "match_by_team",
-            joinColumns = @JoinColumn(name = "match_id"),
-            inverseJoinColumns = @JoinColumn(name = "teamId"))
-    private Set<Team_Entity> teamEntity;
+    @JoinTable(name = "match_by_team", joinColumns = {@JoinColumn(name = "match_id")},
+            inverseJoinColumns ={ @JoinColumn(name = "teamId")})
+    @JsonIgnore
+    private List<Team_Entity> teamEntity;
 
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="tour_id")
     private Tour_Entity tourEntity;
+
 
     public Tour_Entity getTourEntity() {
         return tourEntity;
@@ -37,11 +40,11 @@ public class Matches_Entity {
         this.tourEntity = tour_entity;
     }
 
-    public Set<Team_Entity> getTeamEntity() {
+    public List<Team_Entity> getTeamEntity() {
         return teamEntity;
     }
 
-    public void setTeamEntity(Set<Team_Entity> teamEntity) {
+    public void setTeamEntity(List<Team_Entity> teamEntity) {
         this.teamEntity = teamEntity;
     }
 

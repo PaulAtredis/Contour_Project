@@ -1,5 +1,7 @@
 package com.example.Project.Dto;
 
+import com.example.Project.Entities.Team_Entity;
+
 import java.util.List;
 
 public class Matches_Dto {
@@ -8,7 +10,15 @@ public class Matches_Dto {
     private long end_time;
     private String matchName;
     private List<Tour_Dto> tourDtoList;
+    private List<Team_Entity> teamEntity;
 
+
+    public List<Team_Entity> getTeamEntity() {
+        return teamEntity;
+    }
+    public void setTeamEntity(List<Team_Entity> teamEntity) {
+        this.teamEntity = teamEntity;
+    }
 
     public List<Tour_Dto> getTourDtoList() {
         return tourDtoList;
